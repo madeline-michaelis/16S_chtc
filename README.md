@@ -1,7 +1,13 @@
 # 16S_chtc
 
-# Introduction
-#### Background info, etc
+# Introduction to the pipeline
+**Program:** 
+
+**Purpose:** The purpose of this pipeline is to _____
+
+**Software used:**
+
+**Uses:**
 
 # Workflow
 #### Diagram with steps of pipeline
@@ -10,6 +16,13 @@
 #### Instructions on how to implement workflow using CHTC and data
 
 # Special Considerations
-#### Special info related to workflow/data
+#### Special info related to workflow/data, warnings, etc
 
 # Citations
+**Authors:**
+**Programs used**:
+* Program 1 citation
+* P2 citation
+* P3 citation
+* P4 citation
+**Further contacts**
