@@ -5,6 +5,6 @@
 
 # Workflow
 
-#Getting started
+# Getting started
 
-#Special Considerations
+# Special Considerations
