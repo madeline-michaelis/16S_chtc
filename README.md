@@ -1,4 +1,4 @@
-# 16s rRNA Sequencing Pipeline
+# 16S rRNA Sequencing Pipeline
 
 # Introduction to the pipeline
 **Program:** This pipeline uses x, y and z
@@ -19,7 +19,7 @@
 #### Special info related to workflow/data, warnings, etc
 
 
-## References
+# References
 If you find this pipeline helpful, please cite this GitHub Repository:
 1. Tran, P. Q., Michaelis, M. L. (2025). 16S rRNA-seq (Version ???) / put link to github Bioinfo page once its done
 
@@ -29,7 +29,7 @@ This workflow relies on the following softwares, please cite them as well:
 2. 
 3. 
 
-## Help and additional information:
+# Help and additional information:
 Patricia Q. Tran, ptran5@wisc.edu, University of Wisconsin-Madison Get Help:
 - For people at UW-Madison, please visit the [departmental bioinformatics research support service main website](https://bioinformatics.bact.wisc.edu/). If you are part of the Department of Bacteriology please make an 1-on-1 individual appointment, others please attend one of my weekly office hours.
 - For external people, please submit an issue via the github page.
