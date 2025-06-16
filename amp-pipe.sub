@@ -1,0 +1,41 @@
+container_image = docker://quay.io/qiime2/amplicon:2025.4
+#link to container on quay that has qiime2
+
+#arguments = $(sample) $(staging) don't need this
+
+executable = amp-pipe.sh
+#staging = /staging/mmichaelis
+#define path to staging as var for ease of use
+
+#Mpst recent edit:
+
+transfer_input_files = \
+  file:///staging/mmichaelis/qiime-amp-pipeline/emp-single-end-sequences.tar.gz, \
+  file:///staging/mmichaelis/qiime-amp-pipeline/sample-metadata.tsv, \
+  file:///staging/mmichaelis/qiime-amp-pipeline/amp-pipe.sh
+
+transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
+
+#transfer_input_files = \
+ # file:///home/mmichaelis/emp-single-end-sequences, \
+  #file:///home/mmichaelis/qiime-amp-pipeline/sample-metadata.tsv, \
+  #file:///home/mmichaelis/qiime-amp-pipeline/amp-pipe.sh, \
+  
+#Original before Sun edits:
+#transfer_input_files = file://$(staging)/qiime-pipe/sequences.fastq.gz, \
+#file://$(staging)/qiime-pipe/sample-metadata.tsv. \
+#rename based on name of sample data. can unzip sample data by itself before outting in here, jsut leav eit in staging folder
+#transfer_output_remaps = "$(sample)_filtlong.fastq.gz=file://$(staging)/filtlong/$(sample)_filtlong.fastq.gz"
+
+log = logs/amp-pipe$(cluster).log
+error = logs/amp-pipe$(cluster).err
+output = logs/amp-pipe$(cluster).out
+
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+
+request_cpus = 8
+request_memory = 16GB
+request_disk = 14GB
+#estmiate value based on input output and container. input is 25M, out 25M, container 11GB
+
+queue
