@@ -1,0 +1,25 @@
+#link container 
+container_image = docker://quay.io/qiime2/amplicon:2025.4
+
+#reference your sh file
+executable = 02_dada2_qc.sh
+
+#state path to input and expected output files
+transfer_input_files = \
+  file:///staging/mmichaelis/02_dada2_qc/demux.qza
+
+transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
+
+#state path/name of log, err and out files
+log = logs/02_dada2_qc$(cluster).log
+error = logs/02_dada2_qc$(cluster).err
+output = logs/02_dada2_qc$(cluster).out
+
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+
+#make requests and queue
+request_cpus = 8
+request_memory = 16GB
+request_disk = 14GB
+
+queue
