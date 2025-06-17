@@ -25,4 +25,4 @@ qiime demux summarize \
   --i-data demux.qza \
   --o-visualization demux.qzv
 
-echo "Step Complete!"
+echo "Job 01 Complete!"

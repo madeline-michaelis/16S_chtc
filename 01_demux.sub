@@ -6,9 +6,9 @@ executable = 01_demux.sh
 
 #state path to input and expected output files
 transfer_input_files = \
-  file:///staging/mmichaelis/qiime-amp-pipeline/emp-single-end-sequences.tar.gz, \
-  file:///staging/mmichaelis/qiime-amp-pipeline/sample-metadata.tsv, \
-  file:///staging/mmichaelis/qiime-amp-pipeline/01_demux.sh
+  file:///staging/mmichaelis/16S_chtc/emp-single-end-sequences.tar.gz, \
+  file:///staging/mmichaelis/16S_chtc/sample-metadata.tsv, \
+  file:///staging/mmichaelis/16S_chtc/01_demux.sh
 
 transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
 
