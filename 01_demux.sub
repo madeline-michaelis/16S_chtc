@@ -6,11 +6,17 @@ executable = 01_demux.sh
 
 #state path to input and expected output files
 transfer_input_files = \
-  file:///staging/mmichaelis/01_demux/emp-single-end-sequences.tar.gz, \
-  file:///staging/mmichaelis/01_demux/sample-metadata.tsv, \
-  file:///staging/mmichaelis/01_demux/01_demux.sh
+  file:///staging/mmichaelis/input_outputs/00_pipeline_inputs/emp-single-end-sequences.tar.gz, \
+  file:///staging/mmichaelis/input_outputs/00_pipeline_inputs/sample-metadata.tsv, \
+  file:///staging/mmichaelis/input_outputs/00_pipeline_inputs/01_demux.sh
 
 transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
+
+#state path to where output files will go
+transfer_output_remaps = \
+  "emp-single-end-sequences.qza = file:///staging/mmichaelis/input_outputs/01_demux", \
+  "demux.qza = file:///staging/mmichaelis/input_outputs/01_demux", \
+  "demux.qzv = file:///staging/mmichaelis/input_outputs/01_demux"
 
 #state path/name of log, err and out files
 log = logs/01_demux$(cluster).log
