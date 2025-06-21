@@ -8,6 +8,7 @@ executable = 02_dada2_qc.sh
 transfer_input_files = \
   file:///staging/mmichaelis/input_outputs/01_demux/demux.qza
 
+
 transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
 
 #state path to where output files will go

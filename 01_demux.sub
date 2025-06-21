@@ -8,7 +8,8 @@ executable = 01_demux.sh
 transfer_input_files = \
   file:///staging/mmichaelis/input_outputs/00_pipeline_inputs/emp-single-end-sequences.tar.gz, \
   file:///staging/mmichaelis/input_outputs/00_pipeline_inputs/sample-metadata.tsv, \
-  file:///staging/mmichaelis/input_outputs/00_pipeline_inputs/01_demux.sh
+  #make sure to reference your home directory
+  file:///home/mmichaelis/16S_chtc/01_demux.sh
 
 transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
 
