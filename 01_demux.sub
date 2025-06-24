@@ -15,9 +15,9 @@ transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
 
 #state path to where output files will go
 transfer_output_remaps = \
-  "emp-single-end-sequences.qza = file:///staging/mmichaelis/input_outputs/01_demux", \
-  "demux.qza = file:///staging/mmichaelis/input_outputs/01_demux", \
-  "demux.qzv = file:///staging/mmichaelis/input_outputs/01_demux"
+  "emp-single-end-sequences.qza = file:///staging/mmichaelis/input_outputs/01_demux; \
+  demux.qza = file:///staging/mmichaelis/input_outputs/01_demux; \
+  demux.qzv = file:///staging/mmichaelis/input_outputs/01_demux"
 
 #state path/name of log, err and out files
 log = logs/01_demux$(cluster).log
