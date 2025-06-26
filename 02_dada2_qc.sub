@@ -8,15 +8,14 @@ executable = 02_dada2_qc.sh
 transfer_input_files = \
   file:///staging/mmichaelis/input_outputs/01_demux/demux.qza
 
-
 transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
 
 #state path to where output files will go
 transfer_output_remaps = \
-  "rep-seqs.qza = file:///staging/mmichaelis/input_outputs/02_dada2_qc; \
-  table.qza = file:///staging/mmichaelis/input_outputs/02_dada2_qc; \
-  stats.qza = file:///staging/mmichaelis/input_outputs/02_dada2_qc; \
-  stats.qzv = file:///staging/mmichaelis/input_outputs/02_dada2_qc"
+  "rep-seqs.qza = file:///staging/mmichaelis/input_outputs/02_dada2_qc/rep-seqs.qza; \
+  table.qza = file:///staging/mmichaelis/input_outputs/02_dada2_qc/table.qza; \
+  stats.qza = file:///staging/mmichaelis/input_outputs/02_dada2_qc/stats.qza; \
+  stats.qzv = file:///staging/mmichaelis/input_outputs/02_dada2_qc/stats.qzv"
 
 #state path/name of log, err and out files
 log = logs/02_dada2_qc$(cluster).log

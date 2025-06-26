@@ -18,7 +18,6 @@ qiime demux emp-single \
   --m-barcodes-column barcode-sequence \
   --o-per-sample-sequences demux.qza \
   --o-error-correction-details demux-details.qza \
-  --p-rev-comp-mapping-barcodes
 
 echo "Running QIIME summarize..."
 qiime demux summarize \

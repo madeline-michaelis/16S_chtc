@@ -15,8 +15,8 @@ transfer_output_files = table.qzv, rep-seqs.qzv
 
 #state path to desired location of output files
 transfer_output_remaps = \
-  "tables.qzv = file:///staging/mmichaelis/input_outputs/03_features/tables.qzv"; "rep-seqs.qzv = file:///staging/mmichaelis/input_outputs/03_features/rep-seqs.qzv"
- 
+  "table.qzv = file:///staging/mmichaelis/input_outputs/03_features/table.qzv; rep-seqs.qzv = file:///staging/mmichaelis/input_outputs/03_features/rep-seqs.qzv"
+  
 #state path/name of log, err and out files
 log = logs/03_features$(cluster).log
 error = logs/03_features$(cluster).err
