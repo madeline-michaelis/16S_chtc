@@ -1,0 +1,31 @@
+#link container 
+container_image = docker://quay.io/qiime2/amplicon:2025.4
+
+#reference your sh file
+executable = 04_phytree.sh
+staging_path = file:///staging/mmichaelis/input_outputs
+
+#state path to input files from staging folder 02_dada2_qc (not 03)
+transfer_input_files = \
+  $(staging_path)/02_dada2_qc/rep-seqs.qza
+
+#state output files to be transferred
+transfer_output_files = aligned-rep-seqs.qza, masked-aligned-rep-seqs.qza, \
+			unrooted-tree.qza, rooted-tree.qza
+
+#state path to desired location of output files
+transfer_output_remaps = "aligned-rep-seqs.qza = $(staging_path)/04_phytree/aligned-rep-seqs.qza; masked-aligned-rep-seqs.qza = $(staging_path)/04_phytree/masked-aligned-rep-seqs.qza; unrooted-tree.qza = $(staging_path)/04_phytree/unrooted-tree.qza; rooted-tree.qza = $(staging_path)/04_phytree/rooted-tree.qza"
+
+#state path/name of log, err and out files
+log = logs/04_features$(cluster).log
+error = logs/04_features$(cluster).err
+output = logs/04_features$(cluster).out
+
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+
+#make requests and queue
+request_cpus = 8
+request_memory = 12GB
+request_disk = 12GB
+
+queue

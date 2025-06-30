@@ -1,0 +1,43 @@
+#link container 
+container_image = docker://quay.io/qiime2/amplicon:2025.4
+
+#reference your sh file
+executable = 05_abdiv.sh
+staging_path = file:///staging/mmichaelis/input_outputs
+
+#state path to input files from staging folders 04 and 02
+transfer_input_files = \
+  $(staging_path)/04_phytree/rooted-tree.qza, \
+  $(staging_path)/02_dada2_qc/table.qza, \
+  $(staging_path)/02_dada2_qc/sample-metadata.tsv
+
+#state output files to be transferred 
+transfer_output_files = faith-pd-group-significance.qzv, \
+  evenness-group-significance.qzv, \
+  unweighted-unifrac-body-site-group-significance.qzv, \
+  unweighted-unifrac-subject-group-significance.qzv, \
+  unweighted-unifrac-emperor-days-since-experiment-start.qzv, \
+  bray-curtis-emperor-days-since-experiment-start.qzv
+
+#state path to desired location of output files
+transfer_output_remaps = "faith-pd-group-significance.qzv = $(staging_path)/05_abdiv/faith-pd-group-significance.qzv; \
+  evenness-group-significance.qzv = $(staging_path)/05_abdiv/evenness-group-significance.qzv; \
+  unweighted-unifrac-body-site-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-body-site-group-significance.qzv; \
+  unweighted-unifrac-subject-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-subject-group-significance.qzv; \
+  unweighted-unifrac-emperor-days-since-experiment-start.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-emperor-days-since-experiment-start.qzv; \
+  bray-curtis-emperor-days-since-experiment-start.qzv = $(staging_path)/05_abdiv/bray-curtis-emperor-days-since-experiment-start.qzv"
+   
+
+#state path/name of log, err and out files
+log = logs/05_abdiv$(cluster).log
+error = logs/05_abdiv$(cluster).err
+output = logs/05_abdiv$(cluster).out
+
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+
+#make requests and queue
+request_cpus = 8
+request_memory = 12GB
+request_disk = 12GB
+
+queue
