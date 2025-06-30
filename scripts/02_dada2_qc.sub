@@ -15,7 +15,7 @@ transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
 transfer_output_remaps = \
   "rep-seqs.qza = $(staging_path)/02_dada2_qc/rep-seqs.qza; \
   table.qza = $(staging_path)/02_dada2_qc/table.qza; \
-  stats.qza = $(staging_path)02_dada2_qc/stats.qza; \
+  stats.qza = $(staging_path)/02_dada2_qc/stats.qza; \
   stats.qzv = $(staging_path)/02_dada2_qc/stats.qzv"
 
 #state path/name of log, err and out files
