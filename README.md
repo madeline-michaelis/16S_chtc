@@ -1,36 +1,26 @@
 # 16S rRNA Sequencing Pipeline
 
-# Introduction to the pipeline
+## Introduction to the pipeline
 **Program:** This pipeline is based upon QIIME2 Moving Pictures Tutorial and documentation and utilizes a QIIME2 container. It is meant to be run within HTCondor using a DAGMan workflow manager.
 
-**Purpose:** The purpose of this pipeline is to efficiently analyze long-read sequencing data from 16S rRNA genomic datasets. \
-It contains 8 jobs that build upon one another, and generates outputs that are relevant to research questions (including but not limited to phylogenetic trees, diversity and \
-taxonomic analyses, and differential abundance testing results). These processes are often time-consuming and complicated. By working in HTC Condor, this pipeline allows researchers to streamline their data analysis in a reproducible and effective manner.
+**Purpose:** The purpose of this pipeline is to efficiently analyze long-read sequencing data from 16S rRNA genomic datasets. It contains 8 jobs that build upon one another, and generates outputs that are relevant to research questions (including but not limited to phylogenetic trees, diversity and taxonomic analyses, and differential abundance testing results). These processes are often time-consuming and complicated. By working in HTC Condor, this pipeline allows researchers to streamline their data analysis in a reproducible and effective manner.
  
-**Cyberinfrastructure & Implementation:** These scripts are meant to be run by HTCondor, \
-a workflow manager that takes in an executable file and a submit file.\
- They are meant to be run on the UW-Madison shared campus-computing infrastructure CHTC, \
-but could work on other systems with few modifications. The pipeline takes advantage of the \
-high-throughput scaling abilities of HTCondor to submit multiple jobs at the same time. \
-For example, if we had an experimental design of 3 treatment, 3 replicate and 3 reference \
-genomes and 10 time points, we would have to perform the steps 3 * 3 * 3 * 10 = 270 times. Instead, \
-we write the metadata (information about the sample design) in a comma \
-separated file containing 270 rows, and HTCondor will submit 270 jobs at the same time for us.
-
+**Cyberinfrastructure & Implementation:** These scripts are meant to be run by HTCondor, a workflow manager that takes in an executable file and a submit file. They are meant to be run on the UW-Madison shared campus-computing infrastructure CHTC, but could work on other systems with few modifications. The pipeline takes advantage of the high-throughput scaling abilities of HTCondor to submit multiple jobs at the same time. For example, if we had an experimental design of 3 treatment, 3 replicate and 3 reference genomes and 10 time points, we would have to perform the steps 3 * 3 * 3 * 10 = 270 times. Instead, we write the metadata (information about the sample design) in a comma separated file containing 270 rows, and HTCondor will submit 270 jobs at the same time for us.
+ 
 **Uses:** This pipeline can be utilized in research aiming to parse genomic datasets from bacterial communities and generate visualizations based off of their data. Due to its reproducibility, it can be utilized in parts or whole for other genomic analysis processes as well. It is highly reccomended to consult the documentation listed in References below if one is interested in working with this version.
 
-# Workflow
+## Workflow
 #### Diagram with steps of pipeline
 
-# Getting started
+## Getting started
 #### Instructions on how to implement workflow using CHTC and data
 
-# Special Considerations
+## Special Considerations
 * Do not include any personal information in the data input into the pipeline.
 * Please set up a staging folder with CHTC before trying this pipeline. It is meant to process large amounts of data that your home directory may not neccessarily be able to manage.
 * Make sure to update each sub script with your ideal amount of Memory and Disk Requests. Please try to be as accurate as possible, as the more you overshoot, the more runtime and memory is taken up.
 
-# References
+## References
 If you find this pipeline helpful, please cite this GitHub Repository:
 1. Tran, P. Q., Michaelis, M. L. (2025). 16S rRNA-seq (Version 0.1) (link)
 
