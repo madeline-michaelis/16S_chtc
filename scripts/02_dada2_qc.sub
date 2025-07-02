@@ -1,17 +1,18 @@
 #link container 
 container_image = docker://quay.io/qiime2/amplicon:2025.4
 
-#reference your sh file
+#reference sh file
 executable = 02_dada2_qc.sh
 staging_path = file:///staging/mmichaelis/input_outputs
 
-#state path to input and expected output files
+#state path to input files
 transfer_input_files = \
   $(staging_path)/01_demux/demux.qza
 
+#state the output files
 transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
 
-#state path to where output files will go
+#state path to desired location of output files
 transfer_output_remaps = \
   "rep-seqs.qza = $(staging_path)/02_dada2_qc/rep-seqs.qza; \
   table.qza = $(staging_path)/02_dada2_qc/table.qza; \
@@ -23,7 +24,8 @@ log = logs/02_dada2_qc$(cluster).log
 error = logs/02_dada2_qc$(cluster).err
 output = logs/02_dada2_qc$(cluster).out
 
-requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+#set requirements
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 8
