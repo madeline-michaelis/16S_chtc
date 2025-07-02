@@ -21,7 +21,8 @@ log = logs/04_features$(cluster).log
 error = logs/04_features$(cluster).err
 output = logs/04_features$(cluster).out
 
-requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+#set requirements
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 8

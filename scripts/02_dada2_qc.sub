@@ -1,7 +1,7 @@
 #link container 
 container_image = docker://quay.io/qiime2/amplicon:2025.4
 
-#reference sh file
+#reference sh script
 executable = 02_dada2_qc.sh
 staging_path = file:///staging/mmichaelis/input_outputs
 
@@ -12,14 +12,14 @@ transfer_input_files = \
 #state the output files
 transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
 
-#state path to desired location of output files
+#remap outputs to desired location
 transfer_output_remaps = \
   "rep-seqs.qza = $(staging_path)/02_dada2_qc/rep-seqs.qza; \
   table.qza = $(staging_path)/02_dada2_qc/table.qza; \
   stats.qza = $(staging_path)/02_dada2_qc/stats.qza; \
   stats.qzv = $(staging_path)/02_dada2_qc/stats.qzv"
 
-#state path/name of log, err and out files
+#create log/err/out files
 log = logs/02_dada2_qc$(cluster).log
 error = logs/02_dada2_qc$(cluster).err
 output = logs/02_dada2_qc$(cluster).out
