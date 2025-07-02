@@ -19,7 +19,7 @@ transfer_output_remaps = \
   demux.qza = $(staging_path)/01_demux/demux.qza; \
   demux.qzv = $(staging_path)/01_demux/demux.qzv"
 
-#set names of log/err/out files
+#create log/err/out files
 log = logs/01_demux$(cluster).log
 error = logs/01_demux$(cluster).err
 output = logs/01_demux$(cluster).out
@@ -27,7 +27,7 @@ output = logs/01_demux$(cluster).out
 #set requirements
 requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7) 
 
-#make resource requests
+#make requests and queue
 request_cpus = 8
 request_memory = 12GB
 request_disk = 12GB
