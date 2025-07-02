@@ -1,17 +1,17 @@
 #link container 
 container_image = docker://quay.io/qiime2/amplicon:2025.4
 
-#reference your sh file
+#reference sh script
 executable = 05_abdiv.sh
 staging_path = file:///staging/mmichaelis/input_outputs
 
-#state path to input files from staging folders 04 and 02
+#state path to input files
 transfer_input_files = \
   $(staging_path)/04_phytree/rooted-tree.qza, \
   $(staging_path)/02_dada2_qc/table.qza, \
   $(staging_path)/02_dada2_qc/sample-metadata.tsv
 
-#state output files to be transferred 
+#state the output files
 transfer_output_files = faith-pd-group-significance.qzv, \
   evenness-group-significance.qzv, \
   unweighted-unifrac-body-site-group-significance.qzv, \
@@ -19,7 +19,7 @@ transfer_output_files = faith-pd-group-significance.qzv, \
   unweighted-unifrac-emperor-days-since-experiment-start.qzv, \
   bray-curtis-emperor-days-since-experiment-start.qzv
 
-#state path to desired location of output files
+#remap outputs to desired location
 transfer_output_remaps = "faith-pd-group-significance.qzv = $(staging_path)/05_abdiv/faith-pd-group-significance.qzv; \
   evenness-group-significance.qzv = $(staging_path)/05_abdiv/evenness-group-significance.qzv; \
   unweighted-unifrac-body-site-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-body-site-group-significance.qzv; \
@@ -28,12 +28,13 @@ transfer_output_remaps = "faith-pd-group-significance.qzv = $(staging_path)/05_a
   bray-curtis-emperor-days-since-experiment-start.qzv = $(staging_path)/05_abdiv/bray-curtis-emperor-days-since-experiment-start.qzv"
    
 
-#state path/name of log, err and out files
+#create log/err/out files
 log = logs/05_abdiv$(cluster).log
 error = logs/05_abdiv$(cluster).err
 output = logs/05_abdiv$(cluster).out
 
-requirements = (HasCHTCStaging == true) && (HasChtcProjects == true)
+#set requirements
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 8
