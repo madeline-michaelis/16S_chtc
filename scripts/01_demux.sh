@@ -5,7 +5,7 @@ set -e
 echo "Unpacking input files..."
 tar xzf emp-single-end-sequences.tar.gz
 
-echo "Running QIIME tools import..."
+echo "Importing with QIIME tools import..."
 qiime tools import \
   --type 'EMPSingleEndSequences' \
   --input-path emp-single-end-sequences \
