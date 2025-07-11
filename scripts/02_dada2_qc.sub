@@ -7,7 +7,7 @@ staging_path = file:///staging/mmichaelis/input_outputs
 
 #state path to input files
 transfer_input_files = \
-  $(staging_path)/01_demux/demux.qza
+  $(staging_path)/01_import-demux/demux.qza
 
 #state the output files
 transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
