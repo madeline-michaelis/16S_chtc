@@ -3,7 +3,7 @@ container_image = docker://quay.io/qiime2/amplicon:2025.4
 
 #reference sh script
 executable = 02_dada2_qc.sh
-staging_path = file:///staging/mmichaelis/input_outputs
+staging_path = file:///staging/$(netid)/input_outputs
 
 #state path to input files
 transfer_input_files = \

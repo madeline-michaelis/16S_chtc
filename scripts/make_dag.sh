@@ -2,9 +2,12 @@
 
 #Checking arguments are correct
 if [ "$#" -ne 3 ]; then
-	echo "Incorrect input. Requires 3 arguments: bash make_dag.sh <demux=true or false> <netid> <output filename>"
-	echo "Example: bash make_dag.sh TRUE bbadger water_microbiome"
-	echo "Example: bash make_dag.sh FALSE bbadger water_microbiome"
+	echo "Incorrect input. Usage: bash make_dag.sh <demux=T/F> <netid> <output filename>
+		- demux=T/F (required): Are samples demultiplexed? Example: TRUE or FALSE
+		- netid (required): Your UW Madison netid. Example: bbadger
+		- output filename (required): Desired name for file. Example: water_microbiome"
+	echo "Example input: bash make_dag.sh TRUE bbadger water_microbiome"
+
 	exit 1
 fi
 
@@ -18,11 +21,11 @@ touch $FILENAME.dag
 #If seqs need demultiplexing:
 if [ "$DEMUX" = "TRUE" ]; then
 	echo "DEMUX = TRUE, beginning writing $FILENAME.dag"
-#REPLACE  ' with " for DEMUX=FALSE and make rest of jobs they arent listed
+
 	echo "JOB DEMUX 01_demux.sub" >> $FILENAME.dag
 	echo "VARS DEMUX netid=$NETID_PLACEHOLDER" >> $FILENAME.dag
 	echo "JOB QUALC 02_dada2_qc.sub" >> $FILENAME.dag
-	echo "VARS QUALC netid= $NETID_PLACEHOLDER" >> $FILENAME.dag
+	echo "VARS QUALC netid=$NETID_PLACEHOLDER" >> $FILENAME.dag
 	echo "JOB FEATURES 03_features.sub" >> $FILENAME.dag
 	echo "VARS FEATURES netid=$NETID_PLACEHOLDER" >> $FILENAME.dag
 	echo "JOB PHYTREE 04_phytree.sub" >> $FILENAME.dag
@@ -35,9 +38,9 @@ if [ "$DEMUX" = "TRUE" ]; then
 	echo "VARS TAXONOMY netid=$NETID_PLACEHOLDER" >> $FILENAME.dag
 	echo "JOB ANCOMBC 08_ancombc.sub" >> $FILENAME.dag
 	echo "VARS ANCOMBC netid=$NETID_PLACEHOLDER" >> $FILENAME.dag
- 
+
 	echo "PARENT DEMUX CHILD QUALC" >> $FILENAME.dag
-    echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
+        echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
 	echo "PARENT QUALC CHILD PHYTREE" >> $FILENAME.dag
    	echo "PARENT QUALC PHYTREE CHILD DIVERSITY" >> $FILENAME.dag
 	echo "PARENT QUALC PHYTREE CHILD RAREFACTION" >> $FILENAME.dag
