@@ -26,9 +26,6 @@ You will first need access to a /staging/netid folder. For more information abou
 
 In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files)
 
->[!NOTE]
-> This version of binning_wf assumes that you have 1) A metadata tsv file, and 2) Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
-
 ## Instructions
 1. Log into CHTC
 2. Clone this directory into your home directory: 
@@ -53,9 +50,7 @@ chmod +x scripts/*.sh
 8. Import your starting data into your staging/username/input-outputs/00_pipeline_inputs directory.
 
 >[!NOTE]
-> Your data must include:
-> a metadata tsv file
-> Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
+> This pipeline version assumes that you have 1) A metadata tsv file, and 2) Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
 
 7. Navigate back to your home/username/16S_chtc/scripts folder, and from there submit the dag.
   ``` condor_submit_dag microbiome_dag_1.dag ```
