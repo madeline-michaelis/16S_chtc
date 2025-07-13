@@ -36,7 +36,7 @@ In your request, please consider your input files (how many samples will you hav
 2. Clone this directory into your home directory: 
 ```
 git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git --branch branch_name
-cd binning_wf
+cd 16S_chtc
 chmod +x scripts/*.sh
 ```
 3. Create a logs folder in your cloned directory (username/16S_chtc/scripts) for your CHTC log, err and out files.
