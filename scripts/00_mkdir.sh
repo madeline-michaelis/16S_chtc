@@ -1,5 +1,5 @@
 #!/bin/bash
-#To run script, simply type bash 00_setup_folder.sh into the terminal
+#To run script, simply type bash 00_mkdir.sh into the terminal
 
 staging="/staging/mmichaelis"
 project="test_directory"

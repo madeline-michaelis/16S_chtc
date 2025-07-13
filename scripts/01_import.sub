@@ -7,7 +7,7 @@ staging_path = file:///staging/$(netid)/input_outputs
 
 #state path to input files
 transfer_input_files = \
-  $(staging_path)/00_pipeline_inputs/fq-manifest.tsv
+  $(staging_path)/00_pipeline_inputs/sample-metadata.tsv
 
 #state the output files
 transfer_output_files = demux.qza, demux.qzv
