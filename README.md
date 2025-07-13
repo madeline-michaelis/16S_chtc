@@ -5,8 +5,6 @@
 
 **Purpose:** The purpose of this pipeline is to efficiently analyze long-read sequencing data from 16S rRNA genomic datasets. It contains 8 jobs that build upon one another, and generates outputs that are relevant to research questions (including but not limited to phylogenetic trees, diversity and taxonomic analyses, and differential abundance testing results). These processes are often time-consuming and complicated. By working in HTC Condor, this pipeline allows researchers to streamline their data analysis in a reproducible and effective manner.
  
-**Cyberinfrastructure & Implementation:** These scripts are meant to be run by HTCondor, a workflow manager that takes in an executable file and a submit file. They are meant to be run on the UW-Madison shared campus-computing infrastructure CHTC, but could work on other systems with few modifications. The pipeline takes advantage of the high-throughput scaling abilities of HTCondor to submit multiple jobs at the same time. For example, if we had an experimental design of 3 treatment, 3 replicate and 3 reference genomes and 10 time points, we would have to perform the steps 3 * 3 * 3 * 10 = 270 times. Instead, we write the metadata (information about the sample design) in a comma separated file containing 270 rows, and HTCondor will submit 270 jobs at the same time for us.
- 
 **Uses:** This pipeline can be utilized in research aiming to parse genomic datasets from bacterial communities and generate visualizations based off of their data. Due to its reproducibility, it can be utilized in parts or whole for other genomic analysis processes as well. It is highly recommended to consult the documentation listed in References below if one is interested in working with this version.
 
 ## Workflow
@@ -15,9 +13,64 @@
 ## Getting started
 #### Instructions on how to implement workflow using CHTC and data
 Description of directory:
+* README.md: These directions
 * /scripts: Contains all .sh/.sub files required for the pipeline.
-*
+  * 00_mkdir.sh: Script to create directory in staging that will store outputs of jobs
+  * make_dag: DAGman configuration file
+  * 00-08 .sh/.sub pairs for jobs
+* .gitignore: all files to be ignored
 
+## Quick-start guide
+### Preparing input files & folder directory
+You will first need access to a /staging/netid folder. For more information about /staging folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The /staging folder will be used for the large genomic input files, and the large genomic output files.
+
+In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files)
+
+>[!NOTE]
+> This version of binning_wf assumes that you have:
+> a metadata tsv file
+> Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
+
+# Instructions
+1. Log into CHTC
+2. Clone this directory into your home directory: 
+```
+git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git --branch branch_name
+cd binning_wf
+chmod +x scripts/*.sh
+```
+3. Create a logs folder in your cloned directory (username/16S_chtc/scripts) for your CHTC log, err and out files.
+ 
+4. Run the helper script 00_mkdir.sh from your 16S_chtc/scripts directory. This will create the directory within your staging folder that is necessary to handle all file inputs and outputs.
+   ``` bash 00_mkdir.sh ```
+
+5. Run make_dag.sh from your scripts directory. Input the three neccessary arguments (<DEMUX = T/F>, <username>, <filename>) for proper function.
+    * DEMUX references whether or not your samples need to be demultiplexed. Use TRUE if you have single-end sequences, and FALSE if you have paired-end sequences.
+    * Username is your netid username.
+    * Filename is what you wish the dag to be named. If you input microbiome_dag_1, it will be called microbiome_dag_1.dag.
+
+Reference template_dag in this repository for an example output. Example input:
+   ``` bash make_dag.sh TRUE bbadger microbiome_dag_1 ```
+
+6. Confirm that you have A) the proper staging folder structure (input-outputs/all job names 00-08) and B) a DAG with your desired name in your scripts folder.
+
+7. Import your starting data into your staging/username/input-outputs/00_pipeline_inputs directory.
+
+>[!NOTE]
+> Your data must include:
+> a metadata tsv file
+> Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
+
+7. Navigate back to your home/username/16S_chtc/scripts folder, and from there submit the dag.
+  ``` condor_submit_dag microbiome_dag_1.dag ```
+8. Check your DAG's status with:
+  ``` condor_q ```
+9. The result for each job should appear within its respective output file within the staging/username/input_outputs directory.
+10. Clean and repeat. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
+    1. Log out of CHTC
+    2. In terminal, navigate to the location you want the files to go on your device
+    3. Copy the files into that location with:
+       ``` scp username@hostname:/home/username/file ./ ```
 
 ## Special Considerations
 * Do not include any personal information in the data input into the pipeline.
