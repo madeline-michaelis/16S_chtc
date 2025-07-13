@@ -27,9 +27,7 @@ You will first need access to a /staging/netid folder. For more information abou
 In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files)
 
 >[!NOTE]
-> This version of binning_wf assumes that you have:
-> a metadata tsv file
-> Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
+> This version of binning_wf assumes that you have 1) A metadata tsv file, and 2) Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
 
 # Instructions
 1. Log into CHTC
@@ -39,10 +37,9 @@ git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbio
 cd 16S_chtc
 chmod +x scripts/*.sh
 ```
-3. Create a logs folder in your cloned directory (username/16S_chtc/scripts) for your CHTC log, err and out files.
+3. Create a logs folder in your cloned directory (path: home/username/16S_chtc/scripts) for your CHTC log, err and out files.
  
-4. Run the helper script 00_mkdir.sh from your 16S_chtc/scripts directory. This will create the directory within your staging folder that is necessary to handle all file inputs and outputs.
-   ``` bash 00_mkdir.sh ```
+4. Run the helper script 00_mkdir.sh from your 16S_chtc/scripts directory. This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
 
 5. Run make_dag.sh from your scripts directory. Be sure to include the three neccessary arguments (DEMUX = T/F, username, filename) for proper function. Example input:
    ``` bash make_dag.sh TRUE bbadger microbiome_dag_1 ```
@@ -51,7 +48,7 @@ chmod +x scripts/*.sh
     * Filename is what you wish the dag to be named. If you input microbiome_dag_1, it will be called microbiome_dag_1.dag.
     * Reference template_dag in this repository for an example output.
 
-7. Confirm that you have A) the proper staging folder structure (input-outputs/all job names 00-08) and B) a DAG with your desired name in your scripts folder.
+7. Confirm that you have A) the proper staging folder structure (path: staging/username/input-outputs/all job names 00-08) and B) a DAG with your desired name in your scripts folder.
 
 8. Import your starting data into your staging/username/input-outputs/00_pipeline_inputs directory.
 
