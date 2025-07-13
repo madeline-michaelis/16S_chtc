@@ -15,7 +15,7 @@ transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
 
 #remap outputs to desired location
 transfer_output_remaps = \
-  "emp-single-end-sequences.qza = $(staging_path)/01_demux/emp-single-end-sequences.qza; \
+  "emp-single-end-sequences.qza = $(staging_path)/01_import-demux/emp-single-end-sequences.qza; \
   demux.qza = $(staging_path)/01_import-demux/demux.qza; \
   demux.qzv = $(staging_path)/01_import-demux/demux.qzv"
 

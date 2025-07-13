@@ -14,11 +14,15 @@
 
 ## Getting started
 #### Instructions on how to implement workflow using CHTC and data
+Description of directory:
+* /scripts: Contains all .sh/.sub files required for the pipeline.
+*
+
 
 ## Special Considerations
 * Do not include any personal information in the data input into the pipeline.
 * Please set up a staging folder with CHTC before trying this pipeline. It is meant to process large amounts of data that your home directory may not neccessarily be able to manage.
-* Make sure to update each sub script with your ideal amount of Memory and Disk Requests. Please try to be as accurate as possible, as the more you overshoot, the more runtime and memory is taken up.
+* Make sure to update each sub script with your ideal amount of emory and Disk Requests. Please try to be as accurate as possible, as the more you overshoot, the more runtime and memory is taken up.
 
 ## References
 If you find this pipeline helpful, please cite this GitHub Repository:
