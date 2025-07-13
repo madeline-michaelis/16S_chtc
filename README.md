@@ -44,17 +44,16 @@ chmod +x scripts/*.sh
 4. Run the helper script 00_mkdir.sh from your 16S_chtc/scripts directory. This will create the directory within your staging folder that is necessary to handle all file inputs and outputs.
    ``` bash 00_mkdir.sh ```
 
-5. Run make_dag.sh from your scripts directory. Input the three neccessary arguments (<DEMUX = T/F>, <username>, <filename>) for proper function.
+5. Run make_dag.sh from your scripts directory. Be sure to include the three neccessary arguments (DEMUX = T/F, username, filename) for proper function. Example input:
+   ``` bash make_dag.sh TRUE bbadger microbiome_dag_1 ```
     * DEMUX references whether or not your samples need to be demultiplexed. Use TRUE if you have single-end sequences, and FALSE if you have paired-end sequences.
     * Username is your netid username.
     * Filename is what you wish the dag to be named. If you input microbiome_dag_1, it will be called microbiome_dag_1.dag.
+    * Reference template_dag in this repository for an example output.
 
-Reference template_dag in this repository for an example output. Example input:
-   ``` bash make_dag.sh TRUE bbadger microbiome_dag_1 ```
+7. Confirm that you have A) the proper staging folder structure (input-outputs/all job names 00-08) and B) a DAG with your desired name in your scripts folder.
 
-6. Confirm that you have A) the proper staging folder structure (input-outputs/all job names 00-08) and B) a DAG with your desired name in your scripts folder.
-
-7. Import your starting data into your staging/username/input-outputs/00_pipeline_inputs directory.
+8. Import your starting data into your staging/username/input-outputs/00_pipeline_inputs directory.
 
 >[!NOTE]
 > Your data must include:
