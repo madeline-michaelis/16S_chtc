@@ -2,6 +2,8 @@
 
 set -e
 
+echo "Container launched successfully..."
+
 echo "Importing with QIIME tools import..."
 qiime tools import \
  --type 'SampleData[PairedEndSequencesWithQuality]' \
