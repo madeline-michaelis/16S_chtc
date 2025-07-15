@@ -47,17 +47,29 @@ chmod +x scripts/*.sh
 
 7. Confirm that you have A) the proper staging folder structure (path: staging/username/input-outputs/all job names 00-08) and B) a DAG with your desired name in your scripts folder.
 
-8. Import your starting data into your staging/username/input-outputs/00_pipeline_inputs directory.
-
 >[!NOTE]
-> This pipeline version assumes that you have 1) A metadata tsv file, and 2) Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (stored as 'fq-mainfest.tsv')
+> This pipeline version assumes that you have 1) A metadata tsv file associated with 2) Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (a set of fastq.gz files)
+
+9. Import your starting data into your staging/username/input-outputs/ directory. Your sequences should go into the 00_pipeline_inputs folder and be in a folder called seqs. Your metadata.tsv should go into the 02_dada2_qc folder. Recommended command: ``` scp file username@hostname:/home/username ``` Further instructions can be found here: [Transferring files - CHTC](https://chtc.cs.wisc.edu/uw-research-computing/transfer-files-computer)
+The structure should look like this: ```
+input_outputs|
+             |---- 00_pipeline_inputs
+                   |----seqs
+                        |-- fastq.gz files OR emp-single-end-seqsuences.tar.gz
+             |---- 01_import-demux
+             |---- 02_dada2_qc
+                   |---- metadata.tsv
+             |---- 03_features .....etc ```
 
 7. Navigate back to your home/username/16S_chtc/scripts folder, and from there submit the dag.
   ``` condor_submit_dag microbiome_dag_1.dag ```
-8. Check your DAG's status with:
+
+9. Check your DAG's status with:
   ``` condor_q ```
-9. The result for each job should appear within its respective output file within the staging/username/input_outputs directory.
-10. Clean and repeat. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
+
+11. The result for each job should appear within its respective output file within the staging/username/input_outputs directory.
+
+13. Clean and repeat. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
     1. Log out of CHTC
     2. In terminal, navigate to the location you want the files to go on your device
     3. Copy the files into that location with:
