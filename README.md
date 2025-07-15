@@ -50,12 +50,17 @@ chmod +x scripts/*.sh
 >[!NOTE]
 > This pipeline version assumes that you have 1) A metadata tsv file associated with 2) Either single-end sequences (stored in a tar 'emp-single-end-sequences.tar.gz' containing 'barcodes.fastq.gz' and 'sequences.fastq.gz' files) OR paired-end sequences (a set of fastq.gz files)
 
-9. Import your starting data into your staging/username/input-outputs/ directory. Your sequences should go into the 00_pipeline_inputs folder and be in a folder called seqs. Your metadata.tsv should go into the 02_dada2_qc folder. Recommended command:
+9. Import your starting data into your staging/username/input-outputs/ directory. Your sequences should go into the 00_pipeline_inputs folder and be in a folder called seqs. Your metadata.tsv should go into the 02_dada2_qc folder.
+
+
+
+Recommended command for transfering files from computer to CHTC:
 
 ``` scp file username@hostname:/home/username ```
 
 Further instructions can be found here: [Transferring files - CHTC](https://chtc.cs.wisc.edu/uw-research-computing/transfer-files-computer)
-The structure should look like this:
+
+The final structure should look like this:
 
 ```input_outputs|
              |---- 00_pipeline_inputs
