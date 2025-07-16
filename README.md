@@ -9,7 +9,7 @@
 
 # Workflow
 #### Diagram with steps of pipeline
-
+![diagram of 16S workflow DAG](https://github.com/patriciatran/16S_chtc/blob/main/figure_16S_wf.png?raw=true)]
 
 ## Getting started
 #### Instructions on how to implement workflow using CHTC and data
