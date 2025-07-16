@@ -113,7 +113,7 @@ The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the
 9. Switch terminal windows and check that the files are transferred correctly.
 ```
 ls /staging/netid/project/inputs_ouputs/00_pipeline_inputs/seqs
-ls /staging/netid/project/inputs_outputs/00_pipeline_inputs/
+ls /staging/netid/project/input_outputs/00_pipeline_inputs/
 ```
 
 you should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
