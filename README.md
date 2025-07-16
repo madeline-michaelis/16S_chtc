@@ -54,15 +54,20 @@ This will create the directory within your staging folder that is necessary to h
 The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `test_project`
 ```
 cd scripts
-bash 00_mkdir.sh NETID test_project
+# change this for your netid
+NETID=ptran5
+PROJECT=my_project
+bash 00_mkdir.sh $NETID $PROJECT
 ```
-
 
 5. Run `make_dag.sh` from your scripts directory to create a DAG workflow. 
 Be sure to include the four neccessary arguments (DEMUX = T/F, username, groups to compare, project, filename) for proper function. Example input:
 ```
-bash make_dag.sh FALSE bbadger vegetation test_project test_project_dag
+DAGNAME=test_project_dag
+bash make_dag.sh FALSE $NETID vegetation $PROJECT $DAGNAME
 ```
+
+This will create a file named `test_project_dag.dag`
 
     * DEMUX references whether or not your samples need to be demultiplexed. Use TRUE if you have single-end sequences, and FALSE if you have paired-end sequences.
     * Username is your netid username.
@@ -79,12 +84,6 @@ bash make_dag.sh FALSE bbadger vegetation test_project test_project_dag
 > 07/15: We tested this will real data for demux = FALSE, which means that we expect a folder named seqs/ containing forward and reverse reads, already split per sample.
 > In the future, we will test this with real data for demux = TRUE.
 > For now, please only set DEMUX=FALSE.
-
-```
-bash make_dag.sh FALSE bbadger vegetation test_project test_project_dag
-```
-
-will create a file named `test_project_dag.dag`
 
 7. Confirm that you have A) the proper staging folder structure (path: `/staging/username/project/input-outputs/all job names 00-08`) and B) a DAG with your desired name in your scripts folder.
 
@@ -128,7 +127,7 @@ condor_q
 At this point, you can log out of chtc, the job will still be running.
 Just log back in later to see the job progress by typing condor_q again.
 
-9. The result for each job should appear within its respective output file within the `/staging/username/project/input_outputs` directory.
+9. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT/input_outputs` directory.
 
 10. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
 
