@@ -9,10 +9,13 @@
 
 # Workflow
 #### Diagram with steps of pipeline
+*to add*
 
 ## Getting started
 #### Instructions on how to implement workflow using CHTC and data
-Description of directory:
+
+Description of files in this repository:
+
 * README.md: These directions
 * /scripts: Contains all .sh/.sub files required for the pipeline.
   * 00_mkdir.sh: Script to create directory in staging that will store outputs of jobs
@@ -22,7 +25,8 @@ Description of directory:
 
 # Quick-start guide
 ## Preparing input files & folder directory
-You will first need access to a /staging/netid folder. For more information about /staging folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The /staging folder will be used for the large genomic input files, and the large genomic output files.
+
+You will first need access to a `/staging/netid` folder. For more information about /staging folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The /staging folder will be used for the large genomic input files, and the large genomic output files.
 
 In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files)
 
@@ -45,7 +49,8 @@ chmod +x scripts/*.sh
 mkdir -p scripts/logs
 ```
  
-4. Run the helper script `00_mkdir.sh` from your 16S_chtc/scripts directory. This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
+4. Run the helper script `00_mkdir.sh` from your 16S_chtc/scripts directory. 
+This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
 The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `test_project`
 ```
 cd scripts
@@ -53,7 +58,7 @@ bash 00_mkdir.sh NETID test_project
 ```
 
 
-5. Run make_dag.sh from your scripts directory to create a DAG workflow. 
+5. Run `make_dag.sh` from your scripts directory to create a DAG workflow. 
 Be sure to include the four neccessary arguments (DEMUX = T/F, username, groups to compare, project, filename) for proper function. Example input:
 ```
 bash make_dag.sh FALSE bbadger vegetation test_project test_project_dag
@@ -83,7 +88,7 @@ will create a file named `test_project_dag.dag`
 
 7. Confirm that you have A) the proper staging folder structure (path: `/staging/username/project/input-outputs/all job names 00-08`) and B) a DAG with your desired name in your scripts folder.
 
-8. Import your starting data into your `/staging/username/input-outputs/00_pipeline_inputs` directory.
+8. Import your input data (paired-end fastq files, and sample-metadata.tsv file) into your `/staging/username/input-outputs/00_pipeline_inputs` directory.
 
 To transfer files from your laptop to CHTC you can do the following:
 Open a new terminal window
@@ -93,7 +98,7 @@ cd Downloads
 scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/staging/netid/project/inputs_ouputs/00_pipeline_inputs
 ```
 
-Do the sample thing to transfer the `sample-metadata.tsv` file to the sample folder:
+Do the same thing to transfer the `sample-metadata.tsv` file to the sample folder:
 ```
 scp -r ~/Downloads/sample-metadata.tsv netid@ap2002.chtc.wisc.edu:/staging/netid/project/inputs_ouputs/00_pipeline_inputs
 ```
