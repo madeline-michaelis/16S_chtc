@@ -40,7 +40,7 @@ pwd
 ```
 2. Clone this directory into your home directory and make all the script executable with the `chmod` command:
 ```
-git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git
+git clone https://github.com/patriciatran/16S_chtc
 cd 16S_chtc
 chmod +x scripts/*.sh
 ```
