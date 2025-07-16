@@ -79,6 +79,8 @@ This will create a file named `test_project_dag.dag`
 >[!NOTE]
 > 07/15: For now, Group must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will.
 > This will be fixed in future iterations...
+> For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `00_mkdir.sh`
+
 
 >[!NOTE]
 > 07/15: We tested this will real data for demux = FALSE, which means that we expect a folder named seqs/ containing forward and reverse reads, already split per sample.
@@ -87,7 +89,7 @@ This will create a file named `test_project_dag.dag`
 
 7. Confirm that you have A) the proper staging folder structure (path: `/staging/username/project/input-outputs/all job names 00-08`) and B) a DAG with your desired name in your scripts folder.
 
-8. Import your input data (paired-end fastq files, and sample-metadata.tsv file) into your `/staging/username/input-outputs/00_pipeline_inputs` directory.
+8. Import your input data (paired-end fastq files, and sample-metadata.tsv file) into your `/staging/username/project/input-outputs/00_pipeline_inputs` directory.
 
 To transfer files from your laptop to CHTC you can do the following:
 Open a new terminal window
@@ -108,7 +110,7 @@ The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the
 >For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the 00_pipeline_inputs folder should look like:
 
 
-7. Switch terminal windows and check that the files are transferred correctly.
+9. Switch terminal windows and check that the files are transferred correctly.
 ```
 ls /staging/netid/project/inputs_ouputs/00_pipeline_inputs/seqs
 ls /staging/netid/project/inputs_outputs/00_pipeline_inputs/
@@ -116,14 +118,14 @@ ls /staging/netid/project/inputs_outputs/00_pipeline_inputs/
 
 you should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
 
-8. Navigate back to your home/username/16S_chtc/scripts folder, and from there submit the dag.
+10. Navigate back to your home/username/16S_chtc/scripts folder, and from there submit the dag.
 
 ```
 cd ~/16S_chtc/scripts
 condor_submit_dag test_project_dag.dag
 ```
 
-8. Check your DAG's status with:
+11. Check your DAG's status with:
 ```
 condor_q
 ```
@@ -131,9 +133,9 @@ condor_q
 At this point, you can log out of chtc, the job will still be running.
 Just log back in later to see the job progress by typing condor_q again.
 
-9. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT/input_outputs` directory.
+12. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT/input_outputs` directory.
 
-10. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
+13. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
 
 To do so, open a new Terminal window.
 
@@ -150,6 +152,12 @@ cd /staging/username/project/input_outputs
 get *
 exit
 ```
+# Next steps
+
+The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
+From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.
+The `qza` files are actually zipped files, so you can also unzip them like a regular .zip file.
+
 
 ## Special Considerations
 * Do not include any personal information in the data input into the pipeline.
