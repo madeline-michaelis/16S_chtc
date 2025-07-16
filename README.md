@@ -104,6 +104,10 @@ scp -r ~/Downloads/sample-metadata.tsv netid@ap2002.chtc.wisc.edu:/staging/netid
 
 The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
 
+>[!NOTE]
+>For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the 00_pipeline_inputs folder should look like:
+
+
 7. Switch terminal windows and check that the files are transferred correctly.
 ```
 ls /staging/netid/project/inputs_ouputs/00_pipeline_inputs/seqs
