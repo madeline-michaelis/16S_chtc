@@ -9,7 +9,7 @@
 
 # Workflow
 #### Diagram with steps of pipeline
-*to add*
+
 
 ## Getting started
 #### Instructions on how to implement workflow using CHTC and data
