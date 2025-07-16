@@ -81,7 +81,6 @@ This will create a file named `test_project_dag.dag`
 > This will be fixed in future iterations...
 > For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `00_mkdir.sh`
 
-
 >[!NOTE]
 > 07/15: We tested this will real data for demux = FALSE, which means that we expect a folder named seqs/ containing forward and reverse reads, already split per sample.
 > In the future, we will test this with real data for demux = TRUE.
@@ -157,7 +156,6 @@ exit
 The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
 From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.
 The `qza` files are actually zipped files, so you can also unzip them like a regular .zip file.
-
 
 ## Special Considerations
 * Do not include any personal information in the data input into the pipeline.
