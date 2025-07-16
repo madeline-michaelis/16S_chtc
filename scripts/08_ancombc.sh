@@ -1,38 +1,47 @@
 #!/bin/bash
-set -e 
+set -e
 
-echo "Creating feature table with gut samples..." 
-qiime feature-table filter-samples \
+export COLUMN="$1"
+
+echo "The group we are using is: ${COLUMN}"
+ 
+echo "Comparing abundance across samples in features..."
+
+qiime composition ancombc \
   --i-table table.qza \
   --m-metadata-file sample-metadata.tsv \
-  --p-where '[body-site]="gut"' \
-  --o-filtered-table gut-table.qza
- 
-echo "Comparing abundance across gut samples in features..."
-qiime composition ancombc \
-  --i-table gut-table.qza \
-  --m-metadata-file sample-metadata.tsv \
-  --p-formula subject \
-  --o-differentials ancombc-subject.qza
+  --p-formula "${COLUMN}" \
+  --o-differentials ancombc-${COLUMN}.qza \
+  --verbose
+
 qiime composition da-barplot \
-  --i-data ancombc-subject.qza \
+  --i-data ancombc-${COLUMN}.qza \
   --p-significance-threshold 0.001 \
-  --o-visualization da-barplot-subject.qzv
+  --o-visualization da-barplot-${COLUMN}.qzv \
+  --verbose
 
 echo "Collapsing features at genus level, re-running above..."
+
 qiime taxa collapse \
-  --i-table gut-table.qza \
+  --i-table table.qza \
   --i-taxonomy taxonomy.qza \
   --p-level 6 \
-  --o-collapsed-table gut-table-l6.qza
+  --o-collapsed-table table-level-6.qza \
+  --verbose
+
 qiime composition ancombc \
-  --i-table gut-table-l6.qza \
+  --i-table table-level-6.qza \
   --m-metadata-file sample-metadata.tsv \
-  --p-formula subject \
-  --o-differentials l6-ancombc-subject.qza
+  --p-formula "$COLUMN" \
+  --o-differentials level-6-ancombc-${COLUMN}.qza \
+  --verbose
+
 qiime composition da-barplot \
-  --i-data l6-ancombc-subject.qza \
+  --i-data level-6-ancombc-${COLUMN}.qza \
   --p-significance-threshold 0.001 \
-  --o-visualization l6-da-barplot-subject.qzv
+  --o-visualization level-6-da-barplot-${COLUMN}.qzv \
+  --verbose
+
+ls -lht
 
 echo "Job 08 Complete!"

@@ -1,8 +1,12 @@
 #!/bin/bash
 #To run script, simply type bash 00_mkdir.sh into the terminal
 
-staging="/staging/mmichaelis"
-project="test_directory"
+
+# arguments
+NETID="$1"
+project="$2"
+
+staging="/staging/${NETID}"
 
 echo $staging
 echo $project
