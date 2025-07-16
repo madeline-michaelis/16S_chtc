@@ -40,7 +40,7 @@ pwd
 ```
 2. Clone this directory into your home directory and make all the script executable with the `chmod` command:
 ```
-git clone https://github.com/patriciatran/16S_chtc
+git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git
 cd 16S_chtc
 chmod +x scripts/*.sh
 ```
@@ -163,7 +163,7 @@ The `qza` files are actually zipped files, so you can also unzip them like a reg
 
 # References
 If you find this pipeline helpful, please cite this GitHub Repository:
-1. Tran, P. Q., Michaelis, M. L. (2025). 16S rRNA-seq (Version 0.1) (link)
+1. Tran, P. Q., Michaelis, M. L. (2025). 16S rRNA-seq (Version 0.1) ([link](https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git))
 
 This workflow relies on the following softwares, please cite them as well:
  
