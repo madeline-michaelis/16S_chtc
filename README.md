@@ -10,7 +10,7 @@
 # Workflow
 
 ## Diagram with steps of pipeline
-![diagram of 16S workflow DAG](https://github.com/patriciatran/16S_chtc/blob/main/figure_16S_wf.png?raw=true)
+![diagram of 16S workflow DAG](https://github.com/patriciatran/16S_microbiome_wf/blob/main/figure_16S_wf.png?raw=true)
 
 ## Description of files in this repository:
 
@@ -41,15 +41,15 @@ pwd
 2. Clone this directory into your home directory and make all the script executable with the `chmod` command:
 ```
 git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git
-cd 16S_chtc
+cd 16S_microbiome_wf
 chmod +x scripts/*.sh
 ```
-3. Create a logs folder in your cloned directory (path: home/username/16S_chtc/scripts) for your CHTC log, err and out files.
+3. Create a logs folder in your cloned directory (path: home/username/16S_microbiome_wf/scripts) for your CHTC log, err and out files.
 ```
 mkdir -p scripts/logs
 ```
  
-4. Run the helper script `00_mkdir.sh` from your 16S_chtc/scripts directory. 
+4. Run the helper script `00_mkdir.sh` from your 16S_microbiome_wf/scripts directory. 
 This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
 The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `test_project`
 ```
@@ -117,10 +117,10 @@ ls /staging/netid/project/input_outputs/00_pipeline_inputs/
 
 you should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
 
-10. Navigate back to your home/username/16S_chtc/scripts folder, and from there submit the dag.
+10. Navigate back to your home/username/16S_microbiome_wf/scripts folder, and from there submit the dag.
 
 ```
-cd ~/16S_chtc/scripts
+cd ~/16S_microbiome_wf/scripts
 condor_submit_dag test_project_dag.dag
 ```
 
