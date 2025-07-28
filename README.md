@@ -148,8 +148,18 @@ cd my_chtc_results
 ```
 sftp netid@ap2002.cthc.wisc.edu
 cd /staging/username/project/input_outputs
-get *
+get -r *
 exit
+```
+
+**Another** method to transfer the outputs files are:
+```
+# Make the output folders wherever you want:
+cd ~/Downloads
+mkdir -p my_chtc_results
+cd my_chtc_results
+# replace the netid and the file paths as appropriate, the ./ means transfer these files to the current directory, which would be my_chtc_results in this case 
+scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project/input_outputs ./
 ```
 # Next steps
 
