@@ -186,7 +186,7 @@ Rerun the dag, by making a copy of your dag workflow first (e.g. `test_project_d
 ```
 # in the chtc terminal:
 cp test_project_dag.dag test_project_dag_2.dag
-condor_submit test_project_dag_2.dag
+condor_submit_dag test_project_dag_2.dag
 ```
 
 Wait for the job to complete, and take a look at the output files again, now that the workflow is using the proper trimming parameters that are specific to your dataset.
