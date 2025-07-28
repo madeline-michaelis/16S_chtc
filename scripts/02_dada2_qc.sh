@@ -22,6 +22,8 @@ qiime metadata tabulate \
 echo "exporting table.qza as a tab table"
 qiime tools export \
   --input-path table.qza \
-  --output-path table.tsv
+  --output-path extracted-feature-file
+
+tar cf extracted-feature-file.tar.gz extracted-feature-file
 
 echo "Job 02 Complete!"
