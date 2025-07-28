@@ -161,11 +161,43 @@ cd my_chtc_results
 # replace the netid and the file paths as appropriate, the ./ means transfer these files to the current directory, which would be my_chtc_results in this case 
 scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project/input_outputs ./
 ```
+
 # Next steps
 
 The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
 From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.
 The `qza` files are actually zipped files, so you can also unzip them like a regular .zip file.
+
+# Tips and tricks
+
+After you finish running the pipeline with the defaults, you will likely need to edit a few parameters to correctly process your dataset.
+
+`01-import-demux/demux.qzv` needs to be imported in qiime2 view. Click on the tab that says "Interactive quality plot". Check on the forward and reverse reads what position needs to be trimmed on the left and right-hand side of the forward and reverse reads. 
+
+Go into the `02-dada2-qc.sh` script and manually (using nano) edit the file to change these 4 lines based on what you saw in the demux.qzv file:
+```
+  --p-trim-left-f 0 \
+  --p-trim-left-r 0 \
+  --p-trunc-len-f 100 \
+  --p-trunc-len-r 100 \
+```
+
+Rerun the dag, by making a copy of your dag workflow first (e.g. `test_project_dag.dag`)
+```
+# in the chtc terminal:
+cp test_project_dag.dag test_project_dag_2.dag
+condor_submit test_project_dag_2.dag
+```
+
+Wait for the job to complete, and take a look at the output files again, now that the workflow is using the proper trimming parameters that are specific to your dataset.
+
+Other files to consider are:
+`07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc. You can even change the color paletter.
+
+**Other things you can change**
+- Change the taxonomic database to use something else than greengenes
+- Changing trimming parameters
+- Changing the level of taxonomic in the ancombc.sh script
 
 ## Special Considerations
 * Do not include any personal information in the data input into the pipeline.
