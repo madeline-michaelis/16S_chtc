@@ -10,7 +10,7 @@
 # Workflow
 
 ## Diagram with steps of pipeline
-![diagram of 16S workflow DAG](https://github.com/patriciatran/16S_microbiome_wf/blob/main/figure_16S_wf.png?raw=true)
+![diagram of 16S workflow DAG](https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf/blob/main/figure_16S_wf.png?raw=true)
 
 ## Description of files in this repository:
 
