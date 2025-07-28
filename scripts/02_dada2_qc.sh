@@ -20,7 +20,7 @@ qiime metadata tabulate \
   --o-visualization stats.qzv
 
 echo "exporting table.qza as a tab table"
-qiime tool export \
+qiime tools export \
   --input-path table.qza \
   --output-path table.tsv
 
