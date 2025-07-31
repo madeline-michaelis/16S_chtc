@@ -139,10 +139,6 @@ condor_q
 At this point, you can log out of chtc, the job will still be running.
 Just log back in later to see the job progress by typing condor_q again.
 
->[!NOTE]
->If you see a job on HOLD, you can use ```condor_q -hold [JOBID]``` to check the reason for the job's hold.
-
-
 > [!TIP]
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
