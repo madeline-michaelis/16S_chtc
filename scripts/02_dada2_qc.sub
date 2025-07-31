@@ -11,14 +11,15 @@ transfer_input_files = \
   $(staging_path)/01_import-demux/demux.qza
 
 #state the output files
-transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv
+transfer_output_files = rep-seqs.qza, table.qza, stats.qza, stats.qzv, extracted-feature-file.tar.gz
 
 #remap outputs to desired location
 transfer_output_remaps = \
   "rep-seqs.qza = $(staging_path)/02_dada2_qc/rep-seqs.qza; \
   table.qza = $(staging_path)/02_dada2_qc/table.qza; \
   stats.qza = $(staging_path)/02_dada2_qc/stats.qza; \
-  stats.qzv = $(staging_path)/02_dada2_qc/stats.qzv"
+  stats.qzv = $(staging_path)/02_dada2_qc/stats.qzv; \
+  extracted-feature-file.tar.gz = $(staging_path)/02_dada2_qc/extracted-feature-file.tar.gz"
 
 #create log/err/out files
 log = logs/02_dada2_qc$(cluster).log
