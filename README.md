@@ -139,6 +139,10 @@ condor_q
 At this point, you can log out of chtc, the job will still be running.
 Just log back in later to see the job progress by typing condor_q again.
 
+>[!NOTE]
+>If you see a job on HOLD, you can use ```condor_q -hold [JOBID]``` to check the reason for the job's hold.
+
+
 > [!TIP]
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
@@ -181,7 +185,7 @@ The `qza` files are actually zipped files, so you can also unzip them like a reg
 
 # ✨ Customizing the workflow
 
-After you finish running the pipeline with the defaults, you will likely need to edit a few parameters to correctly process your dataset. Some of the main ones that can be changes are:
+After you finish running the pipeline with the defaults, you will likely need to edit a few parameters to correctly process your dataset. Some of the main ones that can be changed are:
 
 - Trimming lenghts on the forward and reverse reads (likely have to change depending on your data)
 - Depth of sequencing (likely have to change depending on your data)
@@ -210,7 +214,7 @@ Other files to consider are:
 `07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc. You can even change the color paletter.
 
 **Other things you can change**
-- Change the taxonomic database to use something else than greengenes
+- Change the taxonomic database to use something other than greengenes
 - Changing trimming parameters
 - Changing the level of taxonomic in the ancombc.sh script
 
