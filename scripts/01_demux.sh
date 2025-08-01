@@ -1,23 +1,23 @@
 #!/bin/bash
 
 set -e
-echo "Unpacking sequences..."
-tar -xzf emp-paired-end-sequences.tar.gz
 
-echo "Importing with QIIME tools import..."
+NETID="$1"
+PROJECT="$2"
+
+echo "Importing..."
 qiime tools import \
-   --type EMPPairedEndSequences \
-   --input-path emp-paired-end-sequences \
-   --output-path emp-paired-end-sequences.qza
+  --type EMPPairedEndSequences \
+  --input-path /staging/${NETID}/${PROJECT}/input_outputs/00_pipeline_inputs/seqs \
+  --output-path original_demux.qza
 
 echo "Demultiplexing..."
 qiime demux emp-paired \
+  --i-seqs original_demux.qza \
   --m-barcodes-file sample-metadata.tsv \
-  --m-barcodes-column barcode-sequence \
-  --p-rev-comp-mapping-barcodes \
-  --i-seqs emp-paired-end-sequences.qza \
+  --m-barcodes-column barcodesequence \
   --o-per-sample-sequences demux.qza \
-  --o-error-correction-details demux-details.qza
+  --p-rev-comp-mapping-barcodes
 
 echo "Running QIIME summarize..."
 qiime demux summarize \

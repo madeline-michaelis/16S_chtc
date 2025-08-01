@@ -2,7 +2,7 @@
 
 #Checking arguments are correct
 if [ "$#" -ne 5 ]; then
-	echo "Incorrect input. Usage: bash make_dag.sh <demux=T/F> <netid> <output filename>
+	echo "Incorrect input. Usage: bash make_dag.sh <netid> <output filename>
 		- demux=T/F (required): Are samples demultiplexed? Example: TRUE or FALSE
 		- netid (required): Your UW Madison netid. Example: bbadger
 		- group (required): Group for the diversity plots, must be a column name within the sample-metadata.tsv sheet
@@ -27,23 +27,22 @@ touch $FILENAME.dag
 #If seqs need demultiplexing:
 if [ "$DEMUX" = "TRUE" ]; then
 	echo "DEMUX = TRUE, beginning writing $FILENAME.dag"
-
 	echo "JOB DEMUX 01_demux.sub" >> $FILENAME.dag
 	echo "VARS DEMUX netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
-	echo "JOB QUALC 02_dada2_qc.sub" >> $FILENAME.dag
-	echo "VARS QUALC netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
-	echo "JOB FEATURES 03_features.sub" >> $FILENAME.dag
-	echo "VARS FEATURES netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
-	echo "JOB PHYTREE 04_phytree.sub" >> $FILENAME.dag
-	echo "VARS PHYTREE netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
-	echo "JOB DIVERSITY 05_abdiv.sub" >> $FILENAME.dag
-	echo "VARS DIVERSITY netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\" column=\"$GROUP\"" >> $FILENAME.dag
-	echo "JOB RAREFACTION 06_rarefact.sub" >> $FILENAME.dag
-	echo "VARS RAREFACTION netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
-	echo "JOB TAXONOMY 07_taxonomy.sub" >> $FILENAME.dag
-	echo "VARS TAXONOMY netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
-	echo "JOB ANCOMBC 08_ancombc.sub" >> $FILENAME.dag
-	echo "VARS ANCOMBC netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
+        echo "JOB QUALC 02_dada2_qc.sub" >> $FILENAME.dag
+        echo "VARS QUALC netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
+        echo "JOB FEATURES 03_features.sub" >> $FILENAME.dag
+        echo "VARS FEATURES netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
+        echo "JOB PHYTREE 04_phytree.sub" >> $FILENAME.dag
+        echo "VARS PHYTREE netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
+        echo "JOB DIVERSITY 05_abdiv.sub" >> $FILENAME.dag
+        echo "VARS DIVERSITY netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\" column=\"$GROUP\"" >> $FILENAME.dag
+        echo "JOB RAREFACTION 06_rarefact.sub" >> $FILENAME.dag
+        echo "VARS RAREFACTION netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
+        echo "JOB TAXONOMY 07_taxonomy.sub" >> $FILENAME.dag
+        echo "VARS TAXONOMY netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\"" >> $FILENAME.dag
+        echo "JOB ANCOMBC 08_ancombc.sub" >> $FILENAME.dag
+        echo "VARS ANCOMBC netid=\"$NETID_PLACEHOLDER\" project=\"$PROJECT\" column=\"$GROUP\"" >> $FILENAME.dag
 
 	echo "PARENT DEMUX CHILD QUALC" >> $FILENAME.dag
         echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
