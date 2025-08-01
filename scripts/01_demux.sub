@@ -8,17 +8,18 @@ staging_path = file:///staging/$(netid)/$(project)/input_outputs
 
 #state path to input files
 transfer_input_files = \
-  $(staging_path)/00_pipeline_inputs/emp-single-end-sequences.tar.gz, \
+  $(staging_path)/00_pipeline_inputs/emp-paired-end-sequences.tar.gz, \
   $(staging_path)/00_pipeline_inputs/sample-metadata.tsv
 
 #state the output files
-transfer_output_files = emp-single-end-sequences.qza, demux.qza, demux.qzv
+transfer_output_files = demux.qza, demux.qzv, demux-details.qza, emp-paired-end-sequences.qza
 
 #remap outputs to desired location
 transfer_output_remaps = \
-  "emp-single-end-sequences.qza = $(staging_path)/01_import-demux/emp-single-end-sequences.qza; \
-  demux.qza = $(staging_path)/01_import-demux/demux.qza; \
-  demux.qzv = $(staging_path)/01_import-demux/demux.qzv"
+ "demux.qza = $(staging_path)/01_import-demux/demux.qza; \
+  demux.qzv = $(staging_path)/01_import-demux/demux.qzv; \
+  emp-paired-end-sequences.qza = $(staging_path)/01_import-demux/emp-paired-end-sequences.qza; \
+  demux-details.qza = $(staging_path)/01_import-demux/demux-details.qza"
 
 #create log/err/out files
 log = logs/01_demux$(cluster).log

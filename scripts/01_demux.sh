@@ -1,23 +1,23 @@
 #!/bin/bash
 
 set -e
-
-echo "Unpacking input files..."
-tar xzf emp-single-end-sequences.tar.gz
+echo "Unpacking sequences..."
+tar -xzf emp-paired-end-sequences.tar.gz
 
 echo "Importing with QIIME tools import..."
 qiime tools import \
-  --type 'EMPSingleEndSequences' \
-  --input-path emp-single-end-sequences \
-  --output-path emp-single-end-sequences.qza
+   --type EMPPairedEndSequences \
+   --input-path emp-paired-end-sequences \
+   --output-path emp-paired-end-sequences.qza
 
 echo "Demultiplexing..."
-qiime demux emp-single \
-  --i-seqs emp-single-end-sequences.qza \
+qiime demux emp-paired \
   --m-barcodes-file sample-metadata.tsv \
   --m-barcodes-column barcode-sequence \
+  --p-rev-comp-mapping-barcodes \
+  --i-seqs emp-paired-end-sequences.qza \
   --o-per-sample-sequences demux.qza \
-  --o-error-correction-details demux-details.qza \
+  --o-error-correction-details demux-details.qza
 
 echo "Running QIIME summarize..."
 qiime demux summarize \
