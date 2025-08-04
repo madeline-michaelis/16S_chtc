@@ -24,10 +24,7 @@ transfer_output_files = faith-pd-group-significance.qzv, \
 #remap outputs to desired location
 transfer_output_remaps = "faith-pd-group-significance.qzv = $(staging_path)/05_abdiv/faith-pd-group-significance.qzv; \
   evenness-group-significance.qzv = $(staging_path)/05_abdiv/evenness-group-significance.qzv; \
-  unweighted-unifrac-$(column)-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-$(column)-group-significance.qzv
-#  unweighted-unifrac-subject-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-subject-group-significance.qzv; \
-#  unweighted-unifrac-emperor-days-since-experiment-start.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-emperor-days-since-experiment-start.qzv; \
-#  bray-curtis-emperor-days-since-experiment-start.qzv = $(staging_path)/05_abdiv/bray-curtis-emperor-days-since-experiment-start.qzv"
+  unweighted-unifrac-$(column)-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-$(column)-group-significance.qzv"
    
 
 #create log/err/out files

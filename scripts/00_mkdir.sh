@@ -13,6 +13,7 @@ echo $project
 
 mkdir -p $staging/$project/input_outputs/
 mkdir -p $staging/$project/input_outputs/00_pipeline_inputs/
+mkdir -p $staging/$project/input_outputs/00_pipeline_inputs/seqs
 mkdir -p $staging/$project/input_outputs/01_import-demux/
 mkdir -p $staging/$project/input_outputs/02_dada2_qc/
 mkdir -p $staging/$project/input_outputs/03_features/

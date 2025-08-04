@@ -10,7 +10,7 @@
 # Workflow
 
 ## Diagram with steps of pipeline
-![diagram of 16S workflow DAG](https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf/blob/main/figure_16S_wf.png?raw=true)
+![diagram of 16S workflow DAG](figure_16S_wf.png)
 
 ## Description of files in this repository:
 
@@ -31,10 +31,42 @@ In your request, please consider your input files (how many samples will you hav
 
 📂 **Input files needed**
 
-1. You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons. Most of the time, sequencing centers will give you this data already demultiplexed, meaning that you will get 2 files per samples, labelled like this: `{sample}_R1_001.fastq.gz` and `{sample}_R2_001.fastq.gz`. If you receive your data and it is not already demultiplexed:
-* You might receive it as one or multiple files with a "barcode" text file, along with a pair of foward and reverse fastq.qz files. These files need to go into a folder named `emp-paired-end-sequences` within your staging/username/project_name/which needs to then be compressed into a tar called `emp-paired-end-sequences.tar.gz`. 
+**Demultiplied or not?**
+
+1. You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons.
+
+**1.1. Already demultiplexed:**
+
+ Most of the time, sequencing centers will give you this data already **demultiplexed**, meaning that you will get 2 files per samples, labelled like this: `{sample}_R1_001.fastq.gz` and `{sample}_R2_001.fastq.gz`. 
+
+ Organize them like this:
+ ```
+ seqs/{sample}_R1_001.fastq.gz
+ seqs/{sample}_R2_001.fastq.gz
+ etc.
+ ```
+
+ 
+ **1.2 Not already demultiplexed**:
+
+If the data is not already demultiplexed, you should find a forward reads fastq file, a reverse reads fastq file, and a file with barcodes associated with each sample. 
+
+Organize your files like this:
+```
+seqs/
+seqs/forward.fastq.gz
+seqs/reverse.fastq.gz
+seqs/barcodes.fastq.gz
+```
+
+If you just have fastq files, you can "zip" them into the gz file format by typing:
+```
+gzip forward.fastq
+```
+
+
   
-3. You will need a **tab-separated table** named exactly `sample_metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
+2. You will need a **tab-separated table** named exactly `sample_metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
 
 >[!NOTE]
 >For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input folder should look like.
@@ -54,7 +86,7 @@ git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbio
 cd 16S_microbiome_wf
 chmod +x scripts/*.sh
 ```
-3. Create a logs folder in your cloned directory (path: home/username/16S_microbiome_wf/scripts) for your CHTC log, err and out files.
+3. Create a logs folder in your cloned directory (path: `home/username/16S_microbiome_wf/scripts`) for your CHTC log, err and out files.
 ```
 mkdir -p scripts/logs
 ```
@@ -71,34 +103,40 @@ bash 00_mkdir.sh $NETID $PROJECT
 ```
 
 5. Run `make_dag.sh` from your scripts directory to create a DAG workflow. 
-Be sure to include the four neccessary arguments (DEMUX = T/F, username, groups to compare, project, filename) for proper function. Example input:
+Be sure to include the four neccessary arguments for it to work. 
+
+Help page:
 ```
-DAGNAME=test_project_dag
-bash make_dag.sh FALSE $NETID vegetation $PROJECT $DAGNAME
+make_dag.sh: illegal option -- h
+HELP PAGE...
+
+
+Syntax: bash make_dag.sh -d <TRUE|FALSE> -n <netid> -g <group> -p <project> -o <output filename>
+These arguments can be provided in any order, but all arguments are required. Options are case-sensitive.
+
+Options:
+  -d    (required) Demux: Whether you need to demultiplex your data. Use TRUE if you want to demultiplex the data, and FALSE if you have already demultipldex data. Example: TRUE
+  -n    (required) NetID: Your UW Madison netid. Example: bbadger
+  -g    (required) Group: Group for the diversity plots, must be a column name in sample-metadata.tsv. Example: vegetation
+  -p    (required) ProjectName: The project subfolder name. Example: test_project
+  -o    (required) DAG output file name: Desired name for DAG file. Example: test_project
+
+Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p test_project -o test_project_true
+Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p test_project -o test_project_false
 ```
 
-This will create a file named `test_project_dag.dag`
-
-    * DEMUX references whether or not your samples need to be demultiplexed. Use TRUE if you have single-end sequences, and FALSE if you have paired-end sequences.
-    * Username is your netid username.
-    * Group: A column of group you want to use to compare between sites. MUST match a categorical column name in `sample-metadata.tsv`
-    * Project is the project name listed under /staging/netid , that you created using the `00_mkdir.sh` script above.
-    * Filename is what you wish the dag to be named. If you input microbiome_dag_1, it will be called microbiome_dag_1.dag.
-    * Reference template_dag in this repository for an example output.
+This will create a file named `test_project_true.dag` or `test_project_false.dag`
 
 >[!NOTE]
-> 07/15: For now, Group must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will. See Input Files above.
+> 07/15: For now, the group (`-g`) must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will. See Input Files above.
 > This will be fixed in future iterations.
 > For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `00_mkdir.sh`
 
->[!NOTE]
-> 07/15: We tested this will real data for demux = FALSE, which means that we expect a folder named seqs/ containing forward and reverse reads, already split per sample.
-> In the future, we will test this with real data for demux = TRUE.
-> For now, please only set DEMUX=FALSE.
+6. Confirm that you have:
+- A) the proper staging folder structure (path: `/staging/username/project/input_outputs/all job names 00-08`) 
+- B) a DAG with your desired name in your scripts folder.
 
-7. Confirm that you have A) the proper staging folder structure (path: `/staging/username/project/input_outputs/all job names 00-08`) and B) a DAG with your desired name in your scripts folder.
-
-8. Import your input data (paired-end fastq files, and `sample-metadata.tsv` file) into your `/staging/username/project/input_outputs/00_pipeline_inputs` directory.
+7. Import your input data (paired-end fastq files, and `sample-metadata.tsv` file) into your `/staging/username/project/input_outputs/00_pipeline_inputs` directory.
 
 To transfer files from your laptop to CHTC you can do the following:
 Open a new terminal window
@@ -118,7 +156,7 @@ The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the
 >[!NOTE]
 >For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input  `00_pipeline_inputs` folder should look like.
 
-9. Switch terminal windows and check that the files are transferred correctly.
+8. Switch terminal windows and check that the files are transferred correctly.
 ```
 ls /staging/netid/project/input_ouputs/00_pipeline_inputs/seqs
 ls /staging/netid/project/input_outputs/00_pipeline_inputs/
@@ -126,14 +164,14 @@ ls /staging/netid/project/input_outputs/00_pipeline_inputs/
 
 you should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
 
-10. Navigate back to your home/username/16S_microbiome_wf/scripts folder, and from there submit the dag.
+9. Navigate back to your `/home/username/16S_microbiome_wf/scripts` folder, and from there submit the dag.
 
 ```
 cd ~/16S_microbiome_wf/scripts
 condor_submit_dag test_project_dag.dag
 ```
 
-11. Check your DAG's status with:
+10. Check your DAG's status with:
 ```
 condor_q
 ```
@@ -145,9 +183,9 @@ Just log back in later to see the job progress by typing condor_q again.
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
 
-12. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT/input_outputs` directory.
+11. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT/input_outputs` directory.
 
-13. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
+12. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
 
 To do so, open a new Terminal window.
 
@@ -185,21 +223,48 @@ The `qza` files are actually zipped files, so you can also unzip them like a reg
 
 After you finish running the pipeline with the defaults, you will likely need to edit a few parameters to correctly process your dataset. Some of the main ones that can be changed are:
 
-- Trimming lenghts on the forward and reverse reads (likely have to change depending on your data)
-- Depth of sequencing (likely have to change depending on your data)
-- Reference Taxonomic Database
+- Trimming lenghts on the forward and reverse reads (likely have to change depending on your data) (`scripts/02_dada2_qc.sh`)
+- Depth of sequencing (likely have to change depending on your data) (`scripts/05_abdiv.sh`)
+- Reference Taxonomic Database (`scripts/07_taxonomy.sh`)
 
-`01-import-demux/demux.qzv` needs to be imported in qiime2 view. Click on the tab that says "Interactive quality plot". Check on the forward and reverse reads what position needs to be trimmed on the left and right-hand side of the forward and reverse reads. 
+## Asssessing what trimming lengths to use
+`01-import-demux/demux.qzv` needs to be imported in qiime2 view. 
+Click on the tab that says "Interactive quality plot". Check on the forward and reverse reads what position needs to be trimmed on the left and right-hand side of the forward and reverse reads. 
 
-Go into the `02-dada2-qc.sh` script and manually (using nano) edit the file to change these 4 lines based on what you saw in the demux.qzv file:
+Go into the `scripts/02-dada2-qc.sh` script and manually (using nano) edit the file to change these 4 lines based on what you saw in the demux.qzv file:
 ```
-  --p-trim-left-f 0 \
-  --p-trim-left-r 0 \
-  --p-trunc-len-f 100 \
-  --p-trunc-len-r 100 \
+  --p-trim-left-f newValue \
+  --p-trim-left-r newValue \
+  --p-trunc-len-f newValue \
+  --p-trunc-len-r newValue \
 ```
 
-Rerun the dag, by making a copy of your dag workflow first (e.g. `test_project_dag.dag`)
+## Sample Depth
+Open the file `03_features/table.qzv` in Qiime2 View. 
+Go to Interactive Sample Details and play around with the slider to see how increasing the Sequencing Depth decreases the number of seqs per samples.
+
+Edit the line `--p-sampling-depth` of the script `05_abdiv.sh` according to what you see in output file 
+
+## Changing the taxonomic database
+`07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc. You can even change the color paletter.
+
+Currently, the `07_taxonomy.sh` script uses the GreenGenes database. Other common ones are Silva.
+If you want to use the Silva Database instead, modify the `wget` command of script `07_taxonomy.sh` to:
+
+Before (using greengenes, default)
+```
+wget -O 'gg-13-8-99-515-806-nb-classifier.qza' \
+  'https://moving-pictures-tutorial.readthedocs.io/en/latest/data/moving-pictures/gg-13-8-99-515-806-nb-classifier.qza'
+
+```
+
+After (using Silva):
+```
+Information to come.
+```
+
+## Resubmit the DAG
+Once you have modified these values for something customized to your study, rerun the dag, by making a copy of your dag workflow first (e.g. `test_project_dag.dag`)
 ```
 # in the chtc terminal:
 cp test_project_dag.dag test_project_dag_2.dag
@@ -207,14 +272,6 @@ condor_submit_dag test_project_dag_2.dag
 ```
 
 Wait for the job to complete, and take a look at the output files again, now that the workflow is using the proper trimming parameters that are specific to your dataset.
-
-Other files to consider are:
-`07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc. You can even change the color paletter.
-
-**Other things you can change**
-- Change the taxonomic database to use something other than greengenes
-- Changing trimming parameters
-- Changing the level of taxonomic in the ancombc.sh script
 
 ## Special Considerations
 * Do not include any personal information in the data input into the pipeline.

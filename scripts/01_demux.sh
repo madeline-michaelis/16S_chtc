@@ -17,7 +17,8 @@ qiime demux emp-paired \
   --m-barcodes-file sample-metadata.tsv \
   --m-barcodes-column barcodesequence \
   --o-per-sample-sequences demux.qza \
-  --p-rev-comp-mapping-barcodes
+  --p-rev-comp-mapping-barcodes \
+  --o-error-correction-details error.qza
 
 echo "Running QIIME summarize..."
 qiime demux summarize \

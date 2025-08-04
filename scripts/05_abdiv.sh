@@ -33,25 +33,5 @@ qiime diversity beta-group-significance \
   --p-pairwise \
   --o-visualization unweighted-unifrac-${COLUMN}-group-significance.qzv
 
-#qiime diversity beta-group-significance \
-#  --i-distance-matrix diversity-core-metrics-phylogenetic/unweighted_unifrac_distance_matrix.qza \
-#  --m-metadata-file sample-metadata.tsv \
-#  --m-metadata-column subject \
-#  --p-pairwise \
-#  --o-visualization unweighted-unifrac-subject-group-significance.qzv
-
-
-#qiime emperor plot \
-#  --i-pcoa diversity-core-metrics-phylogenetic/unweighted_unifrac_pcoa_results.qza \
-#  --m-metadata-file sample-metadata.tsv \
-#  --p-custom-axes days-since-experiment-start \
-#  --o-visualization unweighted-unifrac-emperor-days-since-experiment-start.qzv
-
-#qiime emperor plot \
-#  --i-pcoa diversity-core-metrics-phylogenetic/bray_curtis_pcoa_results.qza \
-#  --m-metadata-file sample-metadata.tsv \
-#  --p-custom-axes days-since-experiment-start \
-#  --o-visualization bray-curtis-emperor-days-since-experiment-start.qzv
-
 echo "Job 05 Complete!"
 

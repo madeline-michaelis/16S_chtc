@@ -1,1 +1,6 @@
-logs/ #ignores logs dir
+logs/
+scripts/notneeded/
+scripts/logs/
+*.dag
+*dag.*
+
